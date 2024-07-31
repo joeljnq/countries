@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { FilteredCountryNames } from "./types";
 interface TextBoxProps {
-  countryNames:
-    | {
-        eng: string;
-        spa: string;
-      }[]
-    | null;
+  fullCountryNames: {
+    eng: string;
+    spa: string;
+  }[];
+  filteredCountryNames: FilteredCountryNames[];
+  onFilteredCountryNames: (filteredNames: FilteredCountryNames[]) => void;
 }
 
 interface CountryNames {
@@ -13,22 +14,42 @@ interface CountryNames {
   spa: string;
 }
 
-const TextBox: React.FC<TextBoxProps> = ({ countryNames }) => {
-  const [inputText, setInputText] = useState<string>('');
-  const [filteredCountryNames, setFilteredCountryNames] = useState<string[]>([]);
+const TextBox: React.FC<TextBoxProps> = ({
+  fullCountryNames,
+  filteredCountryNames,
+  onFilteredCountryNames,
+}) => {
+  const [inputText, setInputText] = useState<string>("");
+  const [localFilteredNames, setLocalFilteredNames] = useState<
+    FilteredCountryNames[]
+  >([]);
+
   useEffect(() => {
-    if (countryNames && inputText.length > 0) {
-      const filteredNames: CountryNames[] = countryNames.filter(
-        (countryNames) =>
+    if (fullCountryNames && inputText.length > 0) {
+      const filteredNames: CountryNames[] = fullCountryNames.filter(
+        (countryNames: CountryNames) =>
           countryNames.spa.toLowerCase().includes(inputText.toLowerCase()) ||
           countryNames.eng.toLowerCase().includes(inputText.toLowerCase())
       );
-      console.log(filteredNames);
-
-      setFilteredCountryNames(filteredNames.map((country) => country.eng));
+      const newFilteredCountryNames: FilteredCountryNames[] = filteredNames.map(
+        (country) => ({ eng: country.eng })
+      );
+      setLocalFilteredNames(newFilteredCountryNames);
+    } else {
+      setLocalFilteredNames([]);
     }
+  }, [inputText, fullCountryNames]);
 
-  }, [inputText, countryNames]);
+  useEffect(() => {
+
+    
+    if (
+      JSON.stringify(localFilteredNames) !==
+      JSON.stringify(filteredCountryNames)
+    ) {
+      onFilteredCountryNames(localFilteredNames);
+    }
+  }, [localFilteredNames, filteredCountryNames, onFilteredCountryNames]);
 
   return (
     <>
@@ -37,15 +58,7 @@ const TextBox: React.FC<TextBoxProps> = ({ countryNames }) => {
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
       />
-      {filteredCountryNames
-        ? filteredCountryNames.map((country) => {
-            return (
-              <div key={country}>
-                <p>{country}</p>
-              </div>
-            );
-          })
-        : ""}
+      
     </>
   );
 };

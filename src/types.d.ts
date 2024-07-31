@@ -38,8 +38,21 @@ export interface AllCountries {
   car: object;
   timezones: string[];
   continents: string[];
-  flags: object;
+  flags: {
+    png: string
+    svg: string
+    alt: string
+  };
   coatOfArms: object;
   startOfWeek: string;
   capitalInfo: object;
+}
+
+export interface CountryNames {
+  eng: string;
+  spa: string;
+}
+
+export interface FilteredCountryNames {
+  eng: string;
 }
