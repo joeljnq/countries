@@ -23,8 +23,13 @@ const TextBox: React.FC<TextBoxProps> = ({
   const [localFilteredNames, setLocalFilteredNames] = useState<
     FilteredCountryNames[]
   >([]);
-
   useEffect(() => {
+    if(inputText.length === 0) {
+      const newFilteredfountryNames: FilteredCountryNames[] = fullCountryNames.map(
+        (country) => ({ eng: country.eng })
+      );
+      setLocalFilteredNames(newFilteredfountryNames);
+    }
     if (fullCountryNames && inputText.length > 0) {
       const filteredNames: CountryNames[] = fullCountryNames.filter(
         (countryNames: CountryNames) =>
@@ -35,9 +40,7 @@ const TextBox: React.FC<TextBoxProps> = ({
         (country) => ({ eng: country.eng })
       );
       setLocalFilteredNames(newFilteredCountryNames);
-    } else {
-      setLocalFilteredNames([]);
-    }
+    } 
   }, [inputText, fullCountryNames]);
 
   useEffect(() => {
