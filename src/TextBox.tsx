@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FilteredCountryNames } from "./types";
+import "./assets/textbox.css";
 interface TextBoxProps {
   fullCountryNames: {
     eng: string;
@@ -55,14 +56,17 @@ const TextBox: React.FC<TextBoxProps> = ({
   }, [localFilteredNames, filteredCountryNames, onFilteredCountryNames]);
 
   return (
-    <>
+    <div className="form">
       <input
+        className="search-box"
         type="text"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        placeholder="Search for a country..."
       />
+      <span className="input-border"></span>
       
-    </>
+    </div>
   );
 };
 

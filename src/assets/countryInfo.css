@@ -39,6 +39,24 @@
      padding: 0;
  }
 
+ #header-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+    margin-bottom: 30px;
+  }
+  #textbox-wrapper {
+    margin: 0 auto; 
+  }
+  
+  #filter-wrapper {
+    position: absolute; 
+    right: 0; 
+  }
+ 
+ 
+
  @media screen and (max-width: 768px) {
      #wrapper {
         display: grid;
@@ -56,9 +74,21 @@
      #flag {
          width: 100%;
          height: 100px;
-
-
      }
+     #header-wrapper{
+        display: block;
+     }
+
+     #textbox-wrapper {
+        margin: auto; 
+      }
+      
+      #filter-wrapper {
+        margin: auto; 
+        position: relative;
+      }
+     
+
 
  }
 
