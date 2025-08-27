@@ -15,12 +15,14 @@ function App() {
   console.log(filter);
 
   useEffect(() => {
-    fetch('https://restcountries.com/v3.1/all')
+    fetch('https://www.apicountries.com/countries')
       .then(res => res.json())
       .then(res => {
 
         if (res.length > 0) {
-          setFullCountryName(res.map((country: AllCountries) => ({ eng: country.name.common, spa: country.translations.spa.common })))
+          
+          setFullCountryName(res.map((country: AllCountries) => ({ eng: country.name , spa:country.translations.es, translations: country.translations.es })))
+          
           setAllCountries(res)
         }
 

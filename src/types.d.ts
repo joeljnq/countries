@@ -1,14 +1,5 @@
 export interface AllCountries {
-  name: {
-    common: string;
-    official: string;
-    nativeName: {
-        [key: string]: {
-            official: string;
-            common: string;
-        };
-    };
-  };
+  name: string;
   tld: string[];
   cca2: string;
   ccn3: string;
@@ -22,17 +13,14 @@ export interface AllCountries {
   altSpellings: string[];
   region: string;
   languages: object;
-  translations: {
-    spa:{
-      official: string;
-      common: string;
-    }
-  };
   latlng: number[];
   landlocked: boolean;
   area: number;
   demonyms: object;
-  flag: string;
+  flags:{
+    png: string,
+    svg: string,
+  }
   maps: object;
   population: number;
   car: object;
@@ -43,6 +31,9 @@ export interface AllCountries {
     svg: string
     alt: string
   };
+  translations: {
+    es : string
+  }
   coatOfArms: object;
   startOfWeek: string;
   capitalInfo: object;

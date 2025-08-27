@@ -17,7 +17,7 @@ const CountryInfo: React.FC<CountryInfoProps> = ({
  useEffect(() =>{
   const filteredCountries: AllCountries[] = allCountries.filter((country) =>
     filteredCountryNames.some(
-      (filteredCountry) => filteredCountry.eng === country.name.common
+      (filteredCountry) => filteredCountry.eng === country.name
     )
   );
   if(filter === 'ascend'){
@@ -39,7 +39,7 @@ const CountryInfo: React.FC<CountryInfoProps> = ({
             <div  id="headline">
             <img src={country.flags.png} alt="flag" id="flag" />
             </div>
-            <h3>{country.name.common}</h3>
+            <h3>{country.name}</h3>
             <div  id="info">
               <p>Population: {country.population}</p>
               <p>Capital: {country.capital}</p>
